@@ -6,12 +6,12 @@ public class AnimationController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private bool isGrounded;
-    public int animationContol;
+    private bool isBowAttacking, isBowGoing;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.2f;
-    private enum MovementState { idle, running, jumping, falling }
+    private enum MovementState { idle, running, jumping, falling}
 
     private void Awake()
     {
@@ -21,22 +21,9 @@ public class AnimationController : MonoBehaviour
 
     private void Update()
     {
-
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        float moveInput = Input.GetAxis("Horizontal");
 
-
-        if (isGrounded && Mathf.Abs(moveInput) >= 0.3f)
-        {
-            animationContol = 1;
-        }
-        else if (isGrounded)
-            animationContol = 0;
-        if (rb.velocity.y > .1f && !isGrounded)
-            animationContol = 2;
-        else if (rb.velocity.y < .1f && !isGrounded)
-            animationContol = 3;
     }
     private void FixedUpdate()
     {
@@ -50,14 +37,12 @@ public class AnimationController : MonoBehaviour
 
         MovementState state;
 
-        if (Mathf.Abs( moveInput) > 0.2f)
+        if (Mathf.Abs(moveInput) > 0.2f)
         {
             state = MovementState.running;
         }
         else
-        {
             state = MovementState.idle;
-        }
 
         if (rb.velocity.y > .1f)
         {
