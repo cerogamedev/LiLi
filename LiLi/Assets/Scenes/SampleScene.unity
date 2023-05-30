@@ -673,6 +673,8 @@ GameObject:
   - component: {fileID: 1100102872}
   - component: {fileID: 1100102875}
   - component: {fileID: 1100102876}
+  - component: {fileID: 1100102877}
+  - component: {fileID: 1100102878}
   m_Layer: 0
   m_Name: LiLi
   m_TagString: Player
@@ -757,7 +759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100102869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22cf0549169c3834197283de1781b5aa, type: 3}
   m_Name: 
@@ -845,17 +847,42 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100102869}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f5b5b4e655351d46a5ac6e6f4835d26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationContol: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 1035586460}
   groundCheckRadius: 0.2
+--- !u!114 &1100102877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100102869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ffc693636f5b7e4d847e6303cd203f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: 918e9a797fb32ef409fe22a1e4d17e83, type: 2}
+--- !u!114 &1100102878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100102869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7e9f6a48e16e64aa1688def3fb6aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &1285068433
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,7 +40,7 @@ AnimationClip:
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 12
-  m_WrapMode: 0
+  m_WrapMode: 8
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
@@ -86,4 +86,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.6666666
+    functionName: fullyDrew
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 9ffc693636f5b7e4d847e6303cd203f0, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
