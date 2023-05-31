@@ -5,27 +5,38 @@ using System.Collections;
 namespace Lili.Combat {
         public class PlayerCombat : MonoBehaviour {
 
+            // Configurable Variables
             [SerializeField] Weapon weapon;
             private bool canAttack = false;
             private bool isDrawingTheBow = false;
+            //Cache reff
             Animator animator;
             private void Awake() {
                 animator = GetComponent<Animator>();
             }
 
-            private void Update() {
-                if(Input.GetMouseButton(0) && !isDrawingTheBow){
-                    DrawTheBow();
-                }
-                if(canAttack && Input.GetMouseButtonUp(0)){
-                    FreeTheBow();
-                } else if (!canAttack && Input.GetMouseButtonUp(0)) {
-                    StartCoroutine(CancelAttack());
-                    //animator.SetTrigger("cancelAttack");
-                }
-            }
+            private void Update()
+        {
+            BowAttack();
+        }
 
-            public void DrawTheBow(){
+        private void BowAttack()
+        {
+            if (Input.GetMouseButton(0) && !isDrawingTheBow)
+            {
+                DrawTheBow();
+            }
+            if (canAttack && Input.GetMouseButtonUp(0))
+            {
+                FreeTheBow();
+            }
+            else if (!canAttack && Input.GetMouseButtonUp(0))
+            {
+                StartCoroutine(CancelAttack());
+            }
+        }
+
+        public void DrawTheBow(){
 
                 animator.SetTrigger("drawBow");
                 isDrawingTheBow = true;

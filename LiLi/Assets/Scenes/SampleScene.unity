@@ -883,6 +883,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  jumpForce: 15
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 1035586460}
+  groundCheckSize: {x: 0.5, y: 0.5}
+  wallChecks:
+  - {fileID: 1088320909}
+  - {fileID: 1764154857}
+  wallCheckSize: {x: 0.4, y: 0.4}
 --- !u!1 &1285068433
 GameObject:
   m_ObjectHideFlags: 0
