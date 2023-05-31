@@ -130,8 +130,7 @@ namespace Lili.Control {
 
         private void Run()
         {
-            Input.GetAxisRaw("Horizontal");
-            float velocity = Input.GetAxisRaw("Horizontal");
+            float velocity = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
             if (velocity < 0)
             {
                 spriteRenderer.flipX = true;

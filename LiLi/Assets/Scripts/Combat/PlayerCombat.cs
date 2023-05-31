@@ -5,11 +5,8 @@ using System.Collections;
 namespace Lili.Combat {
         public class PlayerCombat : MonoBehaviour {
 
-            // Configurable Variables
-            [SerializeField] Weapon weapon;
             private bool canAttack = false;
             private bool isDrawingTheBow = false;
-            //Cache reff
             Animator animator;
             private void Awake() {
                 animator = GetComponent<Animator>();
@@ -22,15 +19,15 @@ namespace Lili.Combat {
 
         private void BowAttack()
         {
-            if (Input.GetMouseButton(0) && !isDrawingTheBow)
+            if (Input.GetMouseButton(1) && !isDrawingTheBow)
             {
                 DrawTheBow();
             }
-            if (canAttack && Input.GetMouseButtonUp(0))
+            if (canAttack && Input.GetMouseButtonUp(1))
             {
                 FreeTheBow();
             }
-            else if (!canAttack && Input.GetMouseButtonUp(0))
+            else if (!canAttack && Input.GetMouseButtonUp(1))
             {
                 StartCoroutine(CancelAttack());
             }
@@ -48,7 +45,7 @@ namespace Lili.Combat {
                 isDrawingTheBow = false;
             }
 
-            public void fullyDrew(){ //Triggered By Animation
+            public void fullyDrew(){ //Triggered By Bow Animation
                 canAttack = true;
             }
             public IEnumerator CancelAttack(){
