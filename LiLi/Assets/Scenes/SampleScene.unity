@@ -884,7 +884,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 10
-  dashForce: 30
+  dashPower: 20
+  dashTime: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

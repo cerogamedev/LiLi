@@ -13,13 +13,23 @@ namespace Lili.Control {
         [Header("In Engine Configurable Params")]
         [SerializeField] float speed = 5f;
         [SerializeField] float jumpForce = 15f;
-        [SerializeField] float dashForce = 50f;
+        #endregion
+        #region  Dash Params
+        private bool canDash = true;
+        private bool IsDashing;
+        [SerializeField] private float dashPower = 20f;
+        [SerializeField] private float dashTime = 0.3f;
+        private float dashCooldown = 1f;
+
+
+
         #endregion
 
         #region Components
         Animator animator;
         SpriteRenderer spriteRenderer;
         Rigidbody2D rb;
+
         #endregion
         #region CheckParams
         [Header("Check Params")]
@@ -33,7 +43,6 @@ namespace Lili.Control {
 
         #region Checks
         int jumpCount = 2;
-        float directionX = 1;
         #endregion
         private void Awake() {
             animator = GetComponent<Animator>();
@@ -85,22 +94,44 @@ namespace Lili.Control {
         {
             Run();
             Jump();
-            StartCoroutine(Dash());
+            Dash();
         }
 
-        private IEnumerator Dash()
+        private void Dash()
         {
-            if(Input.GetKeyDown(KeyCode.LeftShift)) {
-                rb.velocity += new Vector2(dashForce*directionX - rb.velocity.x ,0);
-                yield return new WaitForSeconds(0.2f);
-                rb.velocity -= new Vector2(dashForce*directionX,0);
-            } else yield return null;
+            Vector2 dashDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (dashDirection == new Vector2(0,0)) { // If no input given dash forward
+                if (spriteRenderer.flipX) {
+                    dashDirection = new Vector2(-1,0);
+                } else if(!spriteRenderer.flipX) {
+                    dashDirection = new Vector2(1,0);
+                }
+            } 
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+            {
+                StartCoroutine(DashBehaviour(dashDirection));
+            }
+        }
+
+        private IEnumerator DashBehaviour(Vector2 dashRotation)
+        {
+            canDash = false;
+            IsDashing = true; // We may use this later.
+            float originalGravity = rb.gravityScale;
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(transform.localScale.x * dashRotation[0] * dashPower, transform.localScale.y * dashRotation[1] * dashPower);
+            yield return new WaitForSeconds(dashTime);
+            rb.gravityScale = originalGravity;
+            rb.velocity = new Vector2(0, transform.localScale.y);
+            IsDashing = false;
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
         }
 
         private void Run()
         {
-            directionX = Input.GetAxisRaw("Horizontal");
-            float velocity = directionX * speed * Time.deltaTime;
+            Input.GetAxisRaw("Horizontal");
+            float velocity = Input.GetAxisRaw("Horizontal");
             if (velocity < 0)
             {
                 spriteRenderer.flipX = true;
