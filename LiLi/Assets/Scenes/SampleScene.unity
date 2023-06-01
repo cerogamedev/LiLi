@@ -670,11 +670,12 @@ GameObject:
   - component: {fileID: 1100102870}
   - component: {fileID: 1100102874}
   - component: {fileID: 1100102873}
-  - component: {fileID: 1100102872}
   - component: {fileID: 1100102875}
-  - component: {fileID: 1100102876}
   - component: {fileID: 1100102877}
   - component: {fileID: 1100102878}
+  - component: {fileID: 1100102881}
+  - component: {fileID: 1100102880}
+  - component: {fileID: 1100102879}
   m_Layer: 0
   m_Name: LiLi
   m_TagString: Player
@@ -752,27 +753,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1100102872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100102869}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22cf0549169c3834197283de1781b5aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 1fa0695a4f7040c43a7baa0f26e516bb, type: 2}
-  _groundCheckPoint: {fileID: 1035586460}
-  _groundCheckSize: {x: 0.45, y: 0.08}
-  _frontWallCheckPoint: {fileID: 1764154857}
-  _backWallCheckPoint: {fileID: 1088320909}
-  _wallCheckSize: {x: 0.5, y: 1}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!61 &1100102873
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -840,23 +820,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1100102876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1100102869}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f5b5b4e655351d46a5ac6e6f4835d26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheck: {fileID: 1035586460}
-  groundCheckRadius: 0.2
 --- !u!114 &1100102877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,7 +832,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffc693636f5b7e4d847e6303cd203f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 918e9a797fb32ef409fe22a1e4d17e83, type: 2}
 --- !u!114 &1100102878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,6 +846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpForce: 10
+  dashStaminaCost: 20
   dashPower: 20
   dashTime: 0.3
   groundLayer:
@@ -895,6 +858,46 @@ MonoBehaviour:
   - {fileID: 1088320909}
   - {fileID: 1764154857}
   wallCheckSize: {x: 0.4, y: 0.4}
+--- !u!114 &1100102879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100102869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b7c3ab96f960d54b84491f72554644e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStamina: 0
+  currentMana: 0
+--- !u!114 &1100102880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100102869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef9006fb63cd47448f6453629605518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1100102881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100102869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4397371c2ff94bb631026125801b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  isDead: 0
 --- !u!1 &1285068433
 GameObject:
   m_ObjectHideFlags: 0

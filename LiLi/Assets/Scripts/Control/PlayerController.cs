@@ -13,6 +13,7 @@ namespace Lili.Control {
         [Header("In Engine Configurable Params")]
         [SerializeField] float speed = 5f;
         [SerializeField] float jumpForce = 15f;
+        [SerializeField] private float dashStaminaCost = 20f;
         #endregion
         #region  Dash Params
         private bool canDash = true;
@@ -29,6 +30,8 @@ namespace Lili.Control {
         Animator animator;
         SpriteRenderer spriteRenderer;
         Rigidbody2D rb;
+        Health health;
+        Combat.Resources resources;
 
         #endregion
         #region CheckParams
@@ -48,8 +51,11 @@ namespace Lili.Control {
             animator = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            health = GetComponent<Health>();
+            resources = GetComponent<Combat.Resources>();
         }
         private void Update() {
+            if (health.isDead) return;
             Movement();
             AirAnimations();
             CollisionChecks();
@@ -60,7 +66,6 @@ namespace Lili.Control {
         {
             if (Physics2D.OverlapArea(groundCheck.position, groundCheckSize, groundLayer)){
                 jumpCount = 2;
-
             }
         }
 
@@ -99,6 +104,7 @@ namespace Lili.Control {
 
         private void Dash()
         {
+            if (resources.currentStamina < dashStaminaCost) return;
             Vector2 dashDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (dashDirection == new Vector2(0,0)) { // If no input given dash forward
                 if (spriteRenderer.flipX) {
@@ -117,6 +123,8 @@ namespace Lili.Control {
         {
             canDash = false;
             IsDashing = true; // We may use this later.
+            resources.ConsumeStamina(dashStaminaCost);
+            animator.SetBool("isDashing", IsDashing);
             float originalGravity = rb.gravityScale;
             rb.gravityScale = 0f;
             rb.velocity = new Vector2(transform.localScale.x * dashRotation[0] * dashPower, transform.localScale.y * dashRotation[1] * dashPower);
@@ -124,6 +132,7 @@ namespace Lili.Control {
             rb.gravityScale = originalGravity;
             rb.velocity = new Vector2(0, transform.localScale.y);
             IsDashing = false;
+            animator.SetBool("isDashing", IsDashing);
             yield return new WaitForSeconds(dashCooldown);
             canDash = true;
         }
