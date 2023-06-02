@@ -55,7 +55,7 @@ namespace Lili.Control {
             resources = GetComponent<Combat.Resources>();
         }
         private void Update() {
-            if (health.isDead) return;
+            if (health.isDead || health.isTakingDamage) return;
             Movement();
             AirAnimations();
             CollisionChecks();

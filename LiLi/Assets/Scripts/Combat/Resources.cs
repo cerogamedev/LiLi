@@ -4,16 +4,22 @@ using UnityEngine;
 
 namespace Lili.Combat {
     public class Resources : MonoBehaviour {
+
+        #region CONSTANT STATS
         const float MAX_STAMINA = 100f;
         const float MAX_MANA = 100f;
+        const float MAX_REGENABLE_MANA = 50f;
         [SerializeField] const float MANA_RECOVERY_RATE =5f;
         [SerializeField] const float STAMINA_RECOVERY_RATE =5f;
         [SerializeField] const float RECOVERY_RATE_FREQUENCY = 1f; // In seconds
+        #endregion
 
-        /*[HideInInspector]*/ public float currentStamina = 0f;
-        /*[HideInInspector]*/ public float currentMana = 0f;
+        #region CHECKS
+        [HideInInspector] public float currentStamina = MAX_STAMINA;
+        [HideInInspector] public float currentMana = MAX_REGENABLE_MANA;
         private bool isRecoveringMana = false;
         private bool isRecoveringStamina = false;
+        #endregion
         private void FixedUpdate() {
             StartRegen();
         }
@@ -44,6 +50,10 @@ namespace Lili.Combat {
                 return false;
             }
         }
+        public void GainMana(float gainedMana){
+            currentMana = MathF.Min(currentMana+gainedMana , MAX_MANA);
+
+        }
 
          public IEnumerator StaminaRegen(){
             isRecoveringStamina = true;
@@ -55,11 +65,13 @@ namespace Lili.Combat {
         }   
         public IEnumerator ManaRegen(){
             isRecoveringMana = true;
-            while (currentMana < MAX_MANA) {
+            while (currentMana < MAX_REGENABLE_MANA) {
                 yield return new WaitForSeconds(RECOVERY_RATE_FREQUENCY);
-                currentMana = Mathf.Min(currentMana+ MANA_RECOVERY_RATE , MAX_MANA);
+                currentMana = Mathf.Min(currentMana+ MANA_RECOVERY_RATE , MAX_REGENABLE_MANA);
             }
+            isRecoveringMana = false;
         }
         
     }
+
 }
