@@ -13,15 +13,15 @@ namespace Lili.Combat{
         #region Cache Referances
         Health targetHealth;  
         #endregion
-       
 
        enum damageDealerType{
             Projectile,
             Sword,
             Trap
         }
-        
+
         private void OnTriggerEnter2D(Collider2D other) {
+            if (other.tag == "Terrain") Destroy(gameObject);
             try
             {
                 targetHealth =  other.gameObject.GetComponent<Health>();
@@ -45,7 +45,6 @@ namespace Lili.Combat{
                 Destroy(damageDealer.GetComponent<BoxCollider2D>());
             }
         }
-
         
     }
 }

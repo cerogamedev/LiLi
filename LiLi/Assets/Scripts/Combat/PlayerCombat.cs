@@ -1,15 +1,25 @@
 using UnityEngine;
-using Lili.Core;
 using System.Collections;
 
 namespace Lili.Combat {
         public class PlayerCombat : MonoBehaviour {
 
+            #region Checks
             private bool canAttack = false;
             private bool isDrawingTheBow = false;
+            #endregion
+            #region Components
             Animator animator;
+            SpriteRenderer spriteRenderer;
+           // [SerializeField] GameObject arrowPrefab;
+            [SerializeField] Transform projectileFirePointRight;
+            [SerializeField] Transform projectileFirePointLeft;
+            [SerializeField] float projectileForce = 20;
+
+            #endregion
             private void Awake() {
                 animator = GetComponent<Animator>();
+                spriteRenderer = GetComponent<SpriteRenderer>();
             }
 
             private void Update()
@@ -53,6 +63,19 @@ namespace Lili.Combat {
                yield return new WaitForSecondsRealtime(1f);
                isDrawingTheBow = false;
                animator.ResetTrigger("cancelAttack");
+            }
+
+            public void FireArrows(GameObject arrow){ // Triggered by bowAttack1 anim
+                if (spriteRenderer.flipX) {
+                    GameObject newArrow = Instantiate(arrow, projectileFirePointLeft.position, projectileFirePointLeft.rotation);
+                    newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * projectileForce * -1f;
+                    newArrow.GetComponent<SpriteRenderer>().flipX = true;
+                } else {
+                    GameObject newArrow = Instantiate(arrow, projectileFirePointRight.position, projectileFirePointRight.rotation);
+                    newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * projectileForce;
+                    print("right");
+                }
+            
             }
 
 

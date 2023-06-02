@@ -83,4 +83,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.16666667
+    functionName: FireArrows
+    data: 
+    objectReferenceParameter: {fileID: 109384266335836895, guid: ca841535bb01a5942a1c0109f4cdc1dd, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
