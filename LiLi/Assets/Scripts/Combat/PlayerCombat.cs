@@ -66,10 +66,10 @@ namespace Lili.Combat {
             }
 
             public void FireArrows(GameObject arrow){ // Triggered by bowAttack1 anim
-                if (spriteRenderer.flipX) {
-                    GameObject newArrow = Instantiate(arrow, projectileFirePointLeft.position, projectileFirePointLeft.rotation);
-                    newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * projectileForce * -1f;
-                    newArrow.GetComponent<SpriteRenderer>().flipX = true;
+                if (spriteRenderer.flipX) { // if player rotates left
+                    GameObject newArrow = Instantiate(arrow, projectileFirePointLeft.position, projectileFirePointLeft.rotation); // istantiate bow
+                    newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * projectileForce * -1f; // set velocity 
+                    newArrow.GetComponent<SpriteRenderer>().flipX = true; // flip arrow for make sense miyav
                 } else {
                     GameObject newArrow = Instantiate(arrow, projectileFirePointRight.position, projectileFirePointRight.rotation);
                     newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * projectileForce;
