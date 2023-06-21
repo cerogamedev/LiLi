@@ -64,7 +64,13 @@ namespace Lili.Control {
 
         private void CollisionChecks()
         {
-            if (Physics2D.OverlapArea(groundCheck.position, groundCheckSize, groundLayer)){
+            RaycastHit2D groundRayCast = Physics2D.BoxCast(groundCheck.position, groundCheckSize, 0f, Vector2.down, 0f, groundLayer);
+            //Drawing gizmoz for visiualization
+            Debug.DrawRay(groundCheck.position, new Vector3(groundCheckSize.x ,0 ,0), Color.green);
+            Debug.DrawRay(groundCheck.position, new Vector3(0 ,-groundCheckSize.y ,0), Color.green);
+            
+            //if (Physics2D.OverlapArea(groundCheck.position, groundCheckSize, groundLayer)){
+            if (groundRayCast){
                 jumpCount = 2;
             }
         }
